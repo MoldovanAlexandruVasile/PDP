@@ -20,7 +20,7 @@ public class Product {
         this.productName = productName;
     }
 
-    public synchronized Integer getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
@@ -32,7 +32,7 @@ public class Product {
         return price;
     }
 
-    public synchronized Integer decreaseQuantity(Integer quantity) {
+    public Integer decreaseQuantity(Integer quantity) {
         Integer remained = this.quantity - quantity;
         this.setQuantity(remained);
         return remained;
