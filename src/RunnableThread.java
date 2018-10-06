@@ -2,31 +2,31 @@ import Domain.Bill;
 import Domain.Product;
 import Domain.Shop;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 class RunnableThread implements Runnable {
     private Thread t;
     private String threadName;
     private Shop shop;
+    private static final DecimalFormat df = new DecimalFormat("#.##");
 
     RunnableThread(Shop shop, String name) {
         this.shop = shop;
         this.threadName = name;
-        System.out.println("Creating " + threadName);
     }
 
     @Override
     public void run() {
-        System.out.println("Running " + threadName);
+        synchronized (shop) {
+            Bill bill = new Bill();
+            List<Product> products = shop.getProductsInShop();
+            try {
+                Integer productsNumber = products.size();
+                Integer productsBought = randomNumber(2, productsNumber) / 2;
+                System.out.println("Transaction " + threadName + ": products bought: " + String.valueOf(productsBought));
+                for (Integer i = 1; i <= productsBought; i++) {
 
-        Bill bill = new Bill();
-        List<Product> products = shop.getProductsInShop();
-        try {
-            Integer productsNumber = products.size();
-            Integer productsBought = randomNumber(2, productsNumber) / 2;
-            System.out.println("Transaction " + threadName + ": products bought: " + String.valueOf(productsBought));
-            for (Integer i = 1; i <= productsBought; i++) {
-                synchronized (shop) {
                     if (!checkProductsAvailability())
                         break;
                     Integer aux = randomNumber(0, productsNumber);
@@ -36,6 +36,7 @@ class RunnableThread implements Runnable {
                             Integer quantityBought = randomNumber(1, prod.getQuantity());
                             if (prod.getQuantity() >= quantityBought) {
                                 bill = sellProduct(bill, prod, quantityBought);
+                                shop.getArchive().addSoldProductPrice(Double.valueOf(df.format(prod.getPrice() * quantityBought)));
                             }
                         } else {
                             i--;
@@ -47,17 +48,18 @@ class RunnableThread implements Runnable {
                                         + prod.getProductName() + " -> NOT ENOUGH QUANTITY !");
 
                         }
-                        Thread.sleep(100);
+                        Thread.sleep(250);
                     } else i--;
+
                 }
+            } catch (InterruptedException e) {
+                System.out.println("Transaction " + threadName + " interrupted.");
             }
-        } catch (InterruptedException e) {
-            System.out.println("Transaction " + threadName + " interrupted.");
-        }
-        synchronized (shop) {
+
             shop.addBillIntoArchive(bill);
+            System.out.println("\n\t Checking income accuracy: " + checkIncomes().toString().toUpperCase() +
+                    " \n\t   ~~~~~ Sold: " + df.format(shop.getTotalIncomesPrice()) + " ~~~~~\n");
         }
-        System.out.println("Transaction " + threadName + " finished.");
 
     }
 
@@ -65,9 +67,9 @@ class RunnableThread implements Runnable {
         System.out.println("Transaction " + threadName + ": " + prod.toString() +
                 " \n\t\t\t\t- Quantity bought: " + String.valueOf(quantityBought) +
                 " \n\t\t\t\t- Quantity remained: " + String.valueOf(prod.getQuantity() - quantityBought) +
-                " \n\t\t\t\t- Income: " + String.valueOf(prod.getPrice() * quantityBought) + "\n");
+                " \n\t\t\t\t- Income: " + df.format(prod.getPrice() * quantityBought) + "\n");
         bill.addProductAndQuantityToBill(prod, quantityBought);
-        shop.addToTotalIncomes(prod.getPrice() * quantityBought);
+        shop.addToTotalIncomes(Double.valueOf(df.format(prod.getPrice() * quantityBought)));
         return bill;
     }
 
@@ -97,5 +99,13 @@ class RunnableThread implements Runnable {
         Integer range = highBound - lowBound + lowBound;
         Integer rand = (int) (Math.random() * range) + lowBound;
         return rand;
+    }
+
+    private Boolean checkIncomes() {
+        Double shopRegisteredIncomes = Double.valueOf(df.format(shop.getTotalIncomesPrice()));
+        Double productsSoldPrice = Double.valueOf(df.format(shop.getArchive().getSoldProductsPrice()));
+        if (shopRegisteredIncomes - productsSoldPrice == 0.0)
+            return true;
+        else return false;
     }
 }

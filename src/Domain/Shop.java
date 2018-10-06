@@ -5,17 +5,17 @@ import java.util.List;
 
 public class Shop {
 
-    private BillsArchive billsArchive;
+    private Archive archive;
     private List<Product> productsInShop;
     private Double totalIncomes = 0.0;
 
     public Shop() {
         this.productsInShop = new ArrayList<>();
-        this.billsArchive = new BillsArchive();
+        this.archive = new Archive();
     }
 
-    public List<Bill> getBillsArchive() {
-        return billsArchive.getBillsArchive();
+    public synchronized Archive getArchive() {
+        return archive;
     }
 
     public Double getTotalIncomesPrice() {
@@ -31,7 +31,7 @@ public class Shop {
     }
 
     public void addBillIntoArchive(Bill bill) {
-        this.billsArchive.addBillToArchive(bill);
+        this.archive.addBillToArchive(bill);
     }
 
     public List<Product> getProductsInShop() {
