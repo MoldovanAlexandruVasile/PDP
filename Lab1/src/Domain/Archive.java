@@ -22,11 +22,7 @@ public class Archive {
         this.soldProductsPrice += price;
     }
 
-    public List<Bill> getBillsArchive() {
-        return billsArchive;
-    }
-
-    public Double getSoldProductsPrice() {
+    public synchronized Double getSoldProductsPrice() {
         return soldProductsPrice;
     }
 

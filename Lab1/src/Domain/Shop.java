@@ -20,19 +20,19 @@ public class Shop {
         return archive;
     }
 
-    public Double getTotalIncomesPrice() {
+    public synchronized Double getTotalIncomesPrice() {
         return this.totalIncomes;
     }
 
-    public void addToTotalIncomes(Double totalIncomes) {
+    public synchronized void addToTotalIncomes(Double totalIncomes) {
         this.totalIncomes += totalIncomes;
     }
 
-    public void addProductInShop(Product product) {
+    public synchronized void addProductInShop(Product product) {
         this.productsInShop.add(product);
     }
 
-    public void addBillIntoArchive(Bill bill) {
+    public synchronized void addBillIntoArchive(Bill bill) {
         this.archive.addBillToArchive(bill);
     }
 

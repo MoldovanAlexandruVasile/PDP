@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-              System.out.print("Number of threads: ");
+        System.out.print("Number of threads: ");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String threads = reader.readLine();
         Integer threadsNumber = Integer.valueOf(threads);

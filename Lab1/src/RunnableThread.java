@@ -18,14 +18,14 @@ class RunnableThread implements Runnable {
 
     @Override
     public void run() {
-        synchronized (shop) {
-            Bill bill = new Bill();
-            List<Product> products = shop.getProductsInShop();
-            try {
-                Integer productsNumber = products.size();
-                Integer productsBought = randomNumber(2, productsNumber) / 2;
-                System.out.println("Transaction " + threadName + ": products bought: " + String.valueOf(productsBought));
-                for (Integer i = 1; i <= productsBought; i++) {
+        Bill bill = new Bill();
+        List<Product> products = shop.getProductsInShop();
+        try {
+            Integer productsNumber = products.size();
+            Integer productsBought = randomNumber(2, productsNumber) / 2;
+            System.out.println("Transaction " + threadName + ": products bought: " + String.valueOf(productsBought));
+            for (Integer i = 1; i <= productsBought; i++) {
+                synchronized (shop) {
                     if (!checkProductsAvailability())
                         break;
                     Integer aux = randomNumber(0, productsNumber);
@@ -41,29 +41,28 @@ class RunnableThread implements Runnable {
                             i--;
                             if (prod.getQuantity() == 0) {
                                 System.out.println("Transaction" + threadName + ": OUT OF " +
-                                        "STOCK -> " + prod.getProductName());
+                                        "STOCK -> " + prod.getProductName() + "\n");
                             } else
                                 System.out.println("Transaction" + threadName + ": ERROR: "
-                                        + prod.getProductName() + " -> NOT ENOUGH QUANTITY !");
-
+                                        + prod.getProductName() + " -> NOT ENOUGH QUANTITY !" + "\n");
                         }
                         Thread.sleep(250);
                     } else i--;
-
                 }
-            } catch (InterruptedException e) {
-                System.out.println("Transaction " + threadName + " interrupted.");
             }
+        } catch (InterruptedException e) {
+            System.out.println("Transaction " + threadName + " interrupted.");
+        }
+        synchronized (shop) {
             shop.setTransactions(shop.getTransactions() - 1);
             shop.addBillIntoArchive(bill);
             if (shop.getTransactions() != 0)
                 System.out.println("\n\t Checking income accuracy: " + checkIncomes().toString().toUpperCase() +
-                    " \n\t   ~~~~~ Sold: " + df.format(shop.getTotalIncomesPrice()) + " ~~~~~\n");
+                        " \n\t   ~~~~~ Sold: " + df.format(shop.getTotalIncomesPrice()) + " ~~~~~\n");
             else
                 System.out.println("\n\t Final income accuracy: " + checkFinalIncomes().toString().toUpperCase() +
                         " \n\t   ~~~~~ Sold: " + df.format(shop.getTotalIncomesPrice()) + " ~~~~~\n");
         }
-
     }
 
     private Bill sellProduct(Bill bill, Product prod, Integer quantityBought) {
@@ -80,14 +79,17 @@ class RunnableThread implements Runnable {
         System.out.println("Starting transaction " + threadName);
         if (t == null) {
             t = new Thread(this, threadName);
-            t.start();
+            synchronized (shop) {
+                t.start();
+            }
         }
     }
 
     private Boolean checkProductsAvailability() {
         Integer k = 0;
         for (Product prod : shop.getProductsInShop()) {
-            if (prod.getQuantity() == 0) k++;
+            if (prod.getQuantity() == 0)
+                k++;
             if (k == shop.getProductsInShop().size()) {
                 System.out.println("INFO: All products are sold out !");
                 return false;
