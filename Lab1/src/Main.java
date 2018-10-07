@@ -13,15 +13,13 @@ public class Main {
         String threads = reader.readLine();
         Integer threadsNumber = Integer.valueOf(threads);
 
-        Shop shop = new Shop();
+        Shop shop = new Shop(threadsNumber);
         addProductsToShop(shop);
 
         for (Integer i = 1; i <= threadsNumber; i++) {
             RunnableThread runnableThread = new RunnableThread(shop, String.valueOf(i));
             runnableThread.start();
         }
-        System.out.println();
-
     }
 
     private static void addProductsToShop(Shop shop) {

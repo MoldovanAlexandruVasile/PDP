@@ -29,4 +29,11 @@ public class Archive {
     public Double getSoldProductsPrice() {
         return soldProductsPrice;
     }
+
+    public Double getTotalCostOfBills(){
+        Double income = 0.0;
+        for (Bill bill : billsArchive)
+            income += Double.valueOf(df.format(bill.getTotalBillCost()));
+        return income;
+    }
 }

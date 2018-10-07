@@ -26,7 +26,6 @@ class RunnableThread implements Runnable {
                 Integer productsBought = randomNumber(2, productsNumber) / 2;
                 System.out.println("Transaction " + threadName + ": products bought: " + String.valueOf(productsBought));
                 for (Integer i = 1; i <= productsBought; i++) {
-
                     if (!checkProductsAvailability())
                         break;
                     Integer aux = randomNumber(0, productsNumber);
@@ -55,10 +54,14 @@ class RunnableThread implements Runnable {
             } catch (InterruptedException e) {
                 System.out.println("Transaction " + threadName + " interrupted.");
             }
-
+            shop.setTransactions(shop.getTransactions() - 1);
             shop.addBillIntoArchive(bill);
-            System.out.println("\n\t Checking income accuracy: " + checkIncomes().toString().toUpperCase() +
+            if (shop.getTransactions() != 0)
+                System.out.println("\n\t Checking income accuracy: " + checkIncomes().toString().toUpperCase() +
                     " \n\t   ~~~~~ Sold: " + df.format(shop.getTotalIncomesPrice()) + " ~~~~~\n");
+            else
+                System.out.println("\n\t Final income accuracy: " + checkFinalIncomes().toString().toUpperCase() +
+                        " \n\t   ~~~~~ Sold: " + df.format(shop.getTotalIncomesPrice()) + " ~~~~~\n");
         }
 
     }
@@ -106,6 +109,14 @@ class RunnableThread implements Runnable {
         Double productsSoldPrice = Double.valueOf(df.format(shop.getArchive().getSoldProductsPrice()));
         if (shopRegisteredIncomes - productsSoldPrice == 0.0)
             return true;
-        else return false;
+        return false;
+    }
+
+    private Boolean checkFinalIncomes() {
+        Double shopRegisteredIncomes = Double.valueOf(df.format(shop.getTotalIncomesPrice()));
+        Double billsPrice = Double.valueOf(df.format(shop.getArchive().getTotalCostOfBills()));
+        if (shopRegisteredIncomes - billsPrice == 0.0)
+            return true;
+        return false;
     }
 }

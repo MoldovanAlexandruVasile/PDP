@@ -8,10 +8,12 @@ public class Shop {
     private Archive archive;
     private List<Product> productsInShop;
     private Double totalIncomes = 0.0;
+    private Integer transactions;
 
-    public Shop() {
+    public Shop(Integer transactions) {
         this.productsInShop = new ArrayList<>();
         this.archive = new Archive();
+        this.transactions = transactions;
     }
 
     public synchronized Archive getArchive() {
@@ -36,5 +38,13 @@ public class Shop {
 
     public List<Product> getProductsInShop() {
         return productsInShop;
+    }
+
+    public Integer getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Integer transactions) {
+        this.transactions = transactions;
     }
 }
