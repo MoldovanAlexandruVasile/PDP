@@ -25,7 +25,7 @@ public class Bill {
         return this.bill;
     }
 
-    public Double getTotalBillCost() {
+    public synchronized Double getTotalBillCost() {
         return this.totalBillCost;
     }
 }

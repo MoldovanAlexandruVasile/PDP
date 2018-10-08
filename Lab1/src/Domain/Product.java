@@ -16,11 +16,7 @@ public class Product {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public Integer getQuantity() {
+    public synchronized Integer getQuantity() {
         return quantity;
     }
 
@@ -32,7 +28,7 @@ public class Product {
         return price;
     }
 
-    public Integer decreaseQuantity(Integer quantity) {
+    public synchronized Integer decreaseQuantity(Integer quantity) {
         Integer remained = this.quantity - quantity;
         this.setQuantity(remained);
         return remained;
