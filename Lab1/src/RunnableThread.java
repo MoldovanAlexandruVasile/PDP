@@ -39,12 +39,9 @@ class RunnableThread implements Runnable {
                             }
                         } else {
                             i--;
-                            if (prod.getQuantity() == 0) {
+                            if (prod.getQuantity() == 0)
                                 System.out.println("Transaction " + threadName + ": OUT OF " +
                                         "STOCK -> " + prod.getProductName() + "\n");
-                            } else
-                                System.out.println("Transaction " + threadName + ": ERROR: "
-                                        + prod.getProductName() + " -> NOT ENOUGH QUANTITY !" + "\n");
                         }
                         Thread.sleep(250);
                     } else i--;

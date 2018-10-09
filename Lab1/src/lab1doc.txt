@@ -1,0 +1,36 @@
+
+	I choose the problem number one.
+	For the implementation of the code I used Java language wrote in IntelliJ.
+	I'm using 5 classes:
+		- Product:
+				- name
+				- price
+				- quantity in shop
+		- Bill:
+				- list of products
+				- total price of the bill
+		- Archive:
+				- list of bills
+				- incomes from the sold products
+		- Shop:
+				- archive
+				- list of products present in shop
+				- total incomes from the bills
+				- number of transactions
+		- RunnableThread:
+				- threads
+				- number of the transaction
+				- Shop
+	RunnableThread class extends Runnable. After creating a thread, it starts a "run" method that makes the transactions from the shop. The steps to do that are:
+	    - we get the products from the shop (with their quantity updated), with a "random" method it's decided how many products are bought in that transaction.
+	    - for the number of the products bought, we choose a product from the list, choose a quantity that we want to buy, if the product chosen is already
+	on the bill list or if the quantity of the product equals 0 then we choose another product to buy, otherwise we sell the product (add to the bill, it's price
+	and quantity and decrease the quantity from the shop).
+	    - after execute the code explained above we set the thread too sleep 250 MS
+	To assure the syncronization of the code executed on the above steps, it was used "synchronized" method. After calling a method all threads are syncronized
+and having the shop syncronized.
+
+    Hardware used:
+        - 8 GB RAM
+        - Processor: IntelCore I7
+        - 2.50 GHz
