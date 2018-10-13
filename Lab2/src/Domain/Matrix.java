@@ -21,16 +21,8 @@ public class Matrix {
         return lines;
     }
 
-    public void setNumberLines(Integer lines) {
-        this.lines = lines;
-    }
-
     public Integer getNumberColumns() {
         return columns;
-    }
-
-    public void setNumberColumns(Integer columns) {
-        this.columns = columns;
     }
 
     private void generateMatrix() {
@@ -54,11 +46,11 @@ public class Matrix {
         }
     }
 
-    public Integer getElement(Integer line, Integer column){
+    public Integer getElement(Integer line, Integer column) {
         return matrix[line][column];
     }
 
-    public void setElement(Integer line, Integer column, Integer element){
+    public void setElement(Integer line, Integer column, Integer element) {
         matrix[line][column] = element;
     }
 }

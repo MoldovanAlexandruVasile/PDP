@@ -3,16 +3,100 @@ import Domain.Matrix;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
-import static Domain.AppUtils.*;
+import static Domain.AppUtils.randomNumber;
+import static Domain.AppUtils.separate;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        String operation = readOperation();
+        Integer threads = readThreadsNumber();
+
+        List<Matrix> list = defineMatrixAndNumber(operation);
+        Matrix matrix1 = list.get(0);
+        Matrix matrix2 = list.get(1);
+        printTheMatrix(matrix1, matrix2);
+        Matrix matrix3 = defineMatrix3(matrix1, matrix2, operation);
+
+        if (threads != 0) {
+            if (threads == 1) {
+                System.out.println("First branch\nCreating a single thread for the entire matrix.");
+                System.out.println("Number of created threads: 1.\n");
+                RunnableThread runnableThread = new RunnableThread(matrix1, matrix2, matrix3, 0, 1, operation, -1);
+                runnableThread.start();
+            } else if (threads >= matrix1.getNumberLines() && threads < matrix1.getNumberLines() * matrix1.getNumberColumns()) {
+                System.out.println("Second branch\nCreating a thread for each line of the matrix.");
+                System.out.println("Number of created threads: " + matrix1.getNumberLines() + "\n");
+                for (Integer l = 0; l < matrix1.getNumberLines(); l++) {
+                    RunnableThread runnableThread = new RunnableThread(matrix1, matrix2, matrix3, l, 1, operation, -1);
+                    runnableThread.start();
+                }
+            } else if (threads >= matrix1.getNumberLines() * matrix1.getNumberColumns()) {
+                System.out.println("Third branch.\nCreating a thread for each value of the matrix.");
+                System.out.println("Number of created threads: " + matrix1.getNumberLines() * matrix1.getNumberColumns() + "\n");
+                for (Integer l = 0; l < matrix1.getNumberLines(); l++)
+                    for (Integer c = 0; c < matrix1.getNumberColumns(); c++) {
+                        RunnableThread runnableThread = new RunnableThread(matrix1, matrix2, matrix3, l, 1, operation, c);
+                        runnableThread.start();
+                    }
+            } else {
+                System.out.println("Fourth branch\nCreating a thread that iterates the from K to K lines.");
+                threads = checkNumberOfThreadsThatCanBeUsed(threads);
+                System.out.println("Number of created threads: " + threads + "\n");
+                Integer fromLineToLine = checkNumberOfThreadsThatCanBeUsed(threads);
+                for (Integer startFrom = 0; startFrom < threads; startFrom++) {
+                    RunnableThread runnableThread = new RunnableThread(matrix1, matrix2, matrix3, startFrom, fromLineToLine, operation, -1);
+                    runnableThread.start();
+                }
+            }
+        } else System.out.println("Cannot create 0 threads to execute this !");
+
+
+        System.out.println("Result:");
+        matrix3.printMatrix();
+    }
+
+    private static Matrix defineMatrix3(Matrix matrix1, Matrix matrix2, String operation) {
+        if (operation.equals("+") || operation.equals("-"))
+            return new Matrix(matrix1.getNumberLines(), matrix1.getNumberColumns(), false);
+        else if (operation.equals("*"))
+            return new Matrix(matrix1.getNumberLines(), matrix2.getNumberColumns(), false);
+        return null;
+    }
+
+    private static Integer checkNumberOfThreadsThatCanBeUsed(Integer numberLines) {
+        if (numberLines % 2 <= numberLines % 3)
+            return 2;
+        else return 3;
+    }
+
+    private static void printTheMatrix(Matrix matrix1, Matrix matrix2) {
+        System.out.println("Matrix 1:\n");
+        matrix1.printMatrix();
+        separate();
+        System.out.println("Matrix 2:\n");
+        matrix2.printMatrix();
+        separate();
+    }
+
+    public static Integer readThreadsNumber() throws IOException {
+        System.out.print("Number of threads: ");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Integer operation = Integer.valueOf(reader.readLine());
+        return operation;
+    }
+
+    public static String readOperation() throws IOException {
         System.out.print("Operation you want to perform: ");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String operation = reader.readLine();
-        Integer threads = 0;
+        return operation;
+    }
+
+    public static List<Matrix> defineMatrixAndNumber(String operation) {
         Integer lines = randomNumber();
         Integer columns = randomNumber();
         Matrix matrix1 = null;
@@ -20,32 +104,13 @@ public class Main {
         if (operation.equals("+") || operation.equals("-")) {
             matrix1 = new Matrix(lines, columns, true);
             matrix2 = new Matrix(lines, columns, true);
-            threads = lines * columns;
         } else if (operation.equals("*")) {
             matrix1 = new Matrix(lines, columns, true);
             matrix2 = new Matrix(columns, lines, true);
-            threads = lines * lines;
         } else System.out.println("Error: invalid operation sign.");
-        System.out.println("\nNumber of possible threads: " + threads);
-        System.out.println("Matrix 1:\n");
-        matrix1.printMatrix();
-        separate();
-        System.out.println("Matrix 2:\n");
-        matrix2.printMatrix();
-        separate();
-        if (operation.equals("+")) {
-            System.out.println("Adding:");
-            Matrix matrix3 = addMatrix(matrix1, matrix2);
-            matrix3.printMatrix();
-        } else if (operation.equals("-")) {
-            System.out.println("Subtract:");
-            Matrix matrix3 = differenceMatrix(matrix1, matrix2);
-            matrix3.printMatrix();
-        }
-        else if (operation.equals("*")) {
-            System.out.println("Multiply:");
-            Matrix matrix3 = multiplyMatrix(matrix1, matrix2);
-            matrix3.printMatrix();
-        }
+        List<Matrix> list = new ArrayList<>();
+        list.add(matrix1);
+        list.add(matrix2);
+        return list;
     }
 }

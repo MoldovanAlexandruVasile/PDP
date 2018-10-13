@@ -1,0 +1,40 @@
+	For the implementation of the code I used Java language wrote in IntelliJ.
+
+	I'm using 3 classes:
+		- Matrix:
+				- number of lines
+				- number of columns
+				- the matrix
+
+			- AppUtils:
+				- randomNumber - generates a random number between 1 and 10
+				- separate - prints out a delimiter between steps from code
+
+		- RunnableThread:
+				 - Thread - a thread
+                 - matrix1 - a matrix
+                 - matrix2 - a matrix
+                 - matrix3 - the enw matrix after the computation from the other teo
+                 - fromLineToLine - an integer that indicates the lines that the thread must enter in the matrix
+                 - startLine - an integer that indicates the thread from what line it should start
+                 - operation - a string that indicates the thread, what operation should be don (+ / - / *)
+                 - col - an integer that indicates the thread if it iterates or not through columns.
+                        It also can be -1 == the thread doesn't go on a specific column from the matrix.
+
+	RunnableThread class extends Runnable. After creating a thread, it starts a "run" method that makes math for the matrix. The steps to do that are:
+	    - in Main class there are 4 branches:
+	        - when is created one thread
+	        - when are created as many threads as lines are in the matrix
+	        - when are created as many threads as values are in the matrix (line * columns)
+	        - when are created threads that iterates through matrix line from K to K lines
+	    - first it is checked the operation that must be done on the two matrix.
+	    - second is checked if the thread must iterate using columns
+	    - there are two different flows, iterates on lines, or only modifies a value from a given position in the matrix.
+	    - after execute the code explained above we set the thread too sleep 250 MS
+	To assure the syncronization of the code executed on the above steps, it was used "synchronized" method. After calling a method all threads are syncronized
+and having the new matrix syncronized.
+
+    Hardware used:
+        - 8 GB RAM
+        - Processor: IntelCore I7
+        - 2.50 GHz
