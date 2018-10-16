@@ -21,7 +21,9 @@
                  - col - an integer that indicates the thread if it iterates or not through columns.
                         It also can be -1 == the thread doesn't go on a specific column from the matrix.
 
-	RunnableThread class extends Runnable. After creating a thread, it starts a "run" method that makes math for the matrix. The steps to do that are:
+	RunnableThread class extends Runnable. After creating a thread, it is added to an array list of RunnableThreads.
+	After that, the list is iterated and executes each runnable thread from it with the help of an executor service
+	After are all finished the shutdown method is called. The steps that are done after calling the execute method from executor service are:
 	    - in Main class there are 4 branches:
 	        - when is created one thread
 	        - when are created as many threads as lines are in the matrix

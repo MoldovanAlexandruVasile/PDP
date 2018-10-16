@@ -11,7 +11,7 @@
 				- separate - prints out a delimiter between steps from code
 
 		- RunnableThread:
-				 - Thread - a thread
+				 - millisec - an integer that is the time gave for the thread
                  - matrix1 - a matrix
                  - matrix2 - a matrix
                  - matrix3 - the enw matrix after the computation from the other teo
@@ -21,7 +21,8 @@
                  - col - an integer that indicates the thread if it iterates or not through columns.
                         It also can be -1 == the thread doesn't go on a specific column from the matrix.
 
-	RunnableThread class extends Runnable. After creating a thread, it starts a "run" method that makes math for the matrix. The steps to do that are:
+	RunnableThread class extends Callable. After creating a thread and executing a thread with ExecutorService,
+	it starts a "call" method that makes the math for the matrix. The steps to do that are:
 	    - in Main class there are 4 branches:
 	        - when is created one thread
 	        - when are created as many threads as lines are in the matrix
@@ -31,6 +32,8 @@
 	    - second is checked if the thread must iterate using columns
 	    - there are two different flows, iterates on lines, or only modifies a value from a given position in the matrix.
 	    - after execute the code explained above we set the thread too sleep 250 MS
+	After the call method is finished it checks if there are FutureTasks left to be runned , if there are it waits for all the threads to
+be finished
 	To assure the syncronization of the code executed on the above steps, it was used "synchronized" method. After calling a method all threads are syncronized
 and having the new matrix syncronized.
 
