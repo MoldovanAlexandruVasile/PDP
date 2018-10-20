@@ -22,8 +22,8 @@ static void separate() {
 static std::vector<Matrix> defineMatrixAndNumber(std::string operation) {
 	int lines = randomNumber();
 	int columns = randomNumber();
-	Matrix matrix1 = Matrix(10, 10, false);
-	Matrix matrix2 = Matrix(10, 10, false);
+	Matrix matrix1;
+	Matrix matrix2;
 	if (operation.compare("+") == 0 || operation.compare("-") == 0) {
 		matrix1 = Matrix(lines, columns, true);
 		matrix2 = Matrix(lines, columns, true);
@@ -107,7 +107,7 @@ int main() {
 		}
 		else if (threads >= matrix1.getNumberLines() && threads < matrix1.getNumberLines() * matrix1.getNumberColumns()) {
 			std::cout << "Second branch\nCreating a thread for each line of the matrix.\n";
-			std::cout << "Number of created threads: " + matrix1.getNumberLines() << "\n";
+			std::cout << "Number of created threads: " << matrix1.getNumberLines() << "\n";
 			for (int l = 0; l < matrix1.getNumberLines(); l++) {
 				std::string name = "Thread " + l;
 				RunnableThread runnableThread = RunnableThread(name, matrix1, matrix2, matrix3, l, 1, operation, -1);
@@ -117,7 +117,7 @@ int main() {
 		}
 		else if (threads >= matrix1.getNumberLines() * matrix1.getNumberColumns()) {
 			std::cout << "Third branch.\nCreating a thread for each value of the matrix.\n";
-			std::cout << "Number of created threads: " + matrix1.getNumberLines() * matrix1.getNumberColumns() << "\n";
+			std::cout << "Number of created threads: " << matrix1.getNumberLines() * matrix1.getNumberColumns() << "\n";
 			for (int l = 0; l < matrix1.getNumberLines(); l++)
 				for (int c = 0; c < matrix1.getNumberColumns(); c++) {
 					std::string name = "Thread" + l + c;
@@ -129,7 +129,7 @@ int main() {
 		else {
 			std::cout << "Fourth branch\nCreating a thread that iterates the from K to K lines.\n";
 			threads = checkNumberOfThreadsThatCanBeUsed(threads);
-			std::cout << "Number of created threads: " + threads << "\n";
+			std::cout << "Number of created threads: " << threads << "\n";
 			int fromLineToLine = checkNumberOfThreadsThatCanBeUsed(threads);
 			for (int startFrom = 0; startFrom < threads; startFrom++) {
 				std::string name = "Thread " + startFrom;
@@ -154,7 +154,7 @@ int main() {
 		);
 	}
 	for (auto && result : results) {
-		Matrix newResult =  result.get();
+		Matrix newResult = result.get();
 		printMatrix(newResult);
 	}
 	std::cout << std::endl;
