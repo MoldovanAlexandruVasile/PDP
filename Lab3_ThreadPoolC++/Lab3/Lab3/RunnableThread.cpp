@@ -1,10 +1,5 @@
 #include "RunnableThread.h"
-
-
-#define synchronized(m) \
-	for(std::unique_lock<std::recursive_mutex> lk(m); lk; lk.unlock())
-
-std::recursive_mutex m_mutex;
+#include <thread>
 
 	RunnableThread::RunnableThread(std::string n, Matrix m1, Matrix m2, Matrix m3, int sl, int fltl, std::string o, int c) {
 		name = n;
@@ -46,41 +41,37 @@ std::recursive_mutex m_mutex;
 				matrix3.setElement(line, j, matrix3.getElement(line, j) + m1.getElement(line, col) * m2.getElement(col, j));
 	}
 
-	void RunnableThread::runRunnableThread()
+	void RunnableThread::runThread()
 	{
+		std::mutex _mutex;
+		std::unique_lock<std::mutex> lock(_mutex);
 		if (operation.compare("+") == 0) {
-			synchronized(m_mutex) {
 				if (col == -1)
 					while (startLine < matrix1.getNumberLines()) {
 						addMatrix(matrix1, matrix2, startLine, col);
 						startLine += fromLineToLine;
 					}
 				else addMatrix(matrix1, matrix2, startLine, col);
-			}
+		
 		}
 		else if (operation.compare("-") == 0) {
-			synchronized(m_mutex) {
 				if (col == -1)
 					while (startLine < matrix1.getNumberLines()) {
 						differenceMatrix(matrix1, matrix2, startLine, col);
 						startLine += fromLineToLine;
 					}
 				else { differenceMatrix(matrix1, matrix2, startLine, col); }
-			}
 		}
 		else if (operation.compare("*") == 0) {
-			synchronized(m_mutex) {
 				if (col == -1)
 					while (startLine < matrix1.getNumberLines()) {
 						multiplyMatrix(matrix1, matrix2, startLine, col);
 						startLine += fromLineToLine;
 					}
 				else { multiplyMatrix(matrix1, matrix2, startLine, col); }
-			}
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
-
 
 	Matrix RunnableThread::getMatrix3() {
 		return matrix3;

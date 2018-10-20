@@ -146,7 +146,7 @@ int main() {
 		results.emplace_back(
 			pool.enqueue([matrix3, threadsCreated] {
 			RunnableThread rt = threadsCreated.back();
-			rt.runRunnableThread();
+			rt.runThread();
 			Matrix result = rt.getMatrix3();
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 			return result;

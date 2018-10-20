@@ -22,7 +22,7 @@ public:
 	void addMatrix(Matrix m1, Matrix m2, int line, int col);
 	void differenceMatrix(Matrix m1, Matrix m2, int l, int c);
 	void multiplyMatrix(Matrix m1, Matrix m2, int l, int c);
-	void runRunnableThread();
+	void runThread();
 };
 
 #endif
