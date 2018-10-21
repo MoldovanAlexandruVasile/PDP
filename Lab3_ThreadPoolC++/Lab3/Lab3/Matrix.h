@@ -1,3 +1,4 @@
+#pragma once
 #ifndef Matrix_H
 #define Matrix_H
 

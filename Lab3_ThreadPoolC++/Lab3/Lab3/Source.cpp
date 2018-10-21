@@ -22,8 +22,8 @@ static void separate() {
 static std::vector<Matrix> defineMatrixAndNumber(std::string operation) {
 	int lines = randomNumber();
 	int columns = randomNumber();
-	Matrix matrix1;
-	Matrix matrix2;
+	Matrix matrix1 = Matrix(10, 10, false);
+	Matrix matrix2 = Matrix(10, 10, false);
 	if (operation.compare("+") == 0 || operation.compare("-") == 0) {
 		matrix1 = Matrix(lines, columns, true);
 		matrix2 = Matrix(lines, columns, true);
@@ -70,6 +70,7 @@ Matrix defineMatrix3(Matrix matrix1, Matrix matrix2, std::string operation) {
 		return Matrix(matrix1.getNumberLines(), matrix1.getNumberColumns(), false);
 	else if (operation.compare("*") == 0)
 		return Matrix(matrix1.getNumberLines(), matrix2.getNumberColumns(), false);
+	return Matrix(10, 10, false);
 }
 
 int checkNumberOfThreadsThatCanBeUsed(int numberLines) {
@@ -130,10 +131,9 @@ int main() {
 			std::cout << "Fourth branch\nCreating a thread that iterates the from K to K lines.\n";
 			threads = checkNumberOfThreadsThatCanBeUsed(threads);
 			std::cout << "Number of created threads: " << threads << "\n";
-			int fromLineToLine = checkNumberOfThreadsThatCanBeUsed(threads);
 			for (int startFrom = 0; startFrom < threads; startFrom++) {
-				std::string name = "Thread " + startFrom;
-				RunnableThread runnableThread = RunnableThread(name, matrix1, matrix2, matrix3, startFrom, fromLineToLine, operation, -1);
+				std::string name = "Thread " + std::to_string(startFrom);
+				RunnableThread runnableThread = RunnableThread(name, matrix1, matrix2, matrix3, startFrom, threads, operation, -1);
 				threadsCreated.push_back(runnableThread);
 				number++;
 			}

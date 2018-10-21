@@ -1,0 +1,9 @@
+﻿  Source.cpp
+e:\it\github\pdp\lab3_async\lab3\lab3\source.cpp(106): error C3867: 'RunnableThread::runThread': non-standard syntax; use '&' to create a pointer to member
+e:\it\github\pdp\lab3_async\lab3\lab3\source.cpp(106): error C2672: 'std::async': no matching overloaded function found
+e:\it\github\pdp\lab3_async\lab3\lab3\source.cpp(115): error C3867: 'RunnableThread::runThread': non-standard syntax; use '&' to create a pointer to member
+e:\it\github\pdp\lab3_async\lab3\lab3\source.cpp(115): error C2672: 'std::async': no matching overloaded function found
+e:\it\github\pdp\lab3_async\lab3\lab3\source.cpp(126): error C3867: 'RunnableThread::runThread': non-standard syntax; use '&' to create a pointer to member
+e:\it\github\pdp\lab3_async\lab3\lab3\source.cpp(126): error C2672: 'std::async': no matching overloaded function found
+e:\it\github\pdp\lab3_async\lab3\lab3\source.cpp(137): error C3867: 'RunnableThread::runThread': non-standard syntax; use '&' to create a pointer to member
+e:\it\github\pdp\lab3_async\lab3\lab3\source.cpp(137): error C2672: 'std::async': no matching overloaded function found
