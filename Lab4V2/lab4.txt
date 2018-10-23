@@ -1,0 +1,131 @@
+	For the implementation of the code I used Java language wrote in IntelliJ.
+
+	I'm using 3 classes:
+		- Matrix:
+				- number of lines
+				- number of columns
+				- the matrix
+
+		- AppUtils:
+				- randomNumber - generates a random number between 1 and 10
+				- separate - prints out a delimiter between steps from code
+				- log - prints the time when it was printed among with a given string as parameter
+
+		- PC:
+		         - list - a list where we see how many multiplies are done
+		         - capacity - a number that says to the producer and consumer how many multiplies cand be done at the same moment
+				 - name - the name of the thread
+                 - matrix1 - a matrix
+                 - matrix2 - a matrix
+                 - auxResult - the result of multiplicity of matrix1 and matrix2
+                 - matrix3 - a matrix
+                 - finalResult - the result of multiplicity of auxresult with matrix3
+                 - fromLineToLine - an integer that indicates the lines that the thread must enter in the matrix
+                 - startLine - an integer that indicates the thread from what line it should start
+                 - col - an integer that indicates the thread if it iterates or not through columns.
+                        It also can be -1 == the thread doesn't go on a specific column from the matrix.
+    First there are computed all the 5 matrices and print them.
+	In Main class there are 4 branches:
+	        - when is created one thread
+	        - when are created as many threads as lines are in the matrix
+	        - when are created as many threads as values are in the matrix (line * columns)
+	        - when are created threads that iterates through matrix line from K to K lines
+    In each branch after created a PC object is called a method name runStuff having as parameter the created PC object. In runStuff are created two threads first one is for producer and
+the second one is for the consumer. Each thread implements Runnable() and when starting the producer thread calls runProducer method and the consumer thread calls runConsumer method.
+runProducer method computes the result of the first two matrices and the consumer takes the current result multiplied with the third matrix computes the final result. This process is done
+until the result is completed.
+	To assure the syncronization of the code executed on the above steps, it was used "synchronized" method. After calling a method all threads are syncronized
+and having the new matrix syncronized.
+
+    Hardware used:
+        - 8 GB RAM
+        - Processor: IntelCore I7
+        - 2.50 GHz
+
+    Example:
+
+    Number of threads: 2
+
+    Matrix 1:
+
+    5 3 5 8 8 3 2 8 3
+    3 3 4 6 5 1 6 6 6
+    3 4 10 8 9 5 6 1 2
+    1 10 8 9 5 2 3 4 5
+    9 5 10 4 7 2 1 7 7
+    2 3 3 10 5 3 6 7 6
+    6 7 7 3 7 8 8 9 2
+
+    ======================================================================
+
+
+    Matrix 2:
+
+    9 7 9 9 2 1 6
+    6 3 9 4 2 6 6
+    8 6 5 5 5 7 8
+    8 3 6 7 10 3 1
+    2 2 4 2 10 10 3
+    6 1 4 7 10 2 9
+    1 4 4 8 9 4 1
+    10 1 10 1 3 2 1
+    6 5 4 5 2 9 4
+
+    ======================================================================
+
+
+    Matrix 3:
+
+    8 5 8 7 6 8 4
+    6 6 8 5 2 7 5
+    7 7 5 9 1 9 9
+    2 4 1 9 10 6 3
+    7 10 2 4 5 4 1
+    2 7 2 10 10 8 2
+    4 6 4 1 2 9 4
+
+    ======================================================================
+
+    Fourth branch
+    Creating a thread that iterates the from K to K lines.
+    Number of created threads: 2
+
+    [ 16:49:35 ] Produce: 0
+    [ 16:49:35 ] Produce: 0
+    [ 16:49:35 ] Produce: 0
+    [ 16:49:35 ] Produce: 0
+    [ 16:49:35 ] Consume: 0
+    [ 16:49:35 ] Consume: 0
+    [ 16:49:36 ] Consume: 0
+    [ 16:49:36 ] Consume: 0
+    [ 16:49:36 ] Produce: 1
+    [ 16:49:36 ] Produce: 1
+    [ 16:49:36 ] Produce: 1
+    [ 16:49:36 ] Consume: 1
+    [ 16:49:36 ] Consume: 1
+    [ 16:49:36 ] Consume: 1
+
+    Matrix aux:
+
+    301 148 289 214 279 219 169
+    243 143 242 202 236 209 134
+    271 175 259 261 345 265 217
+    300 165 293 229 271 263 199
+    362 212 338 257 252 276 243
+    280 145 270 231 292 219 143
+    348 187 360 291 344 260 255
+
+    ======================================================================
+
+
+    Matrix resulted:
+
+    8814 10609 6923 10849 8454 11718 6580
+    7506 9202 5926 9580 7544 10157 5661
+    9366 11869 7212 11699 9654 12743 6816
+    9118 11202 7278 11536 9096 12545 6942
+    10336 12386 8567 12960 10010 14367 8097
+    8516 10395 6575 10695 8486 11278 6270
+    10956 13336 8599 13461 10562 14830 8324
+
+    ======================================================================

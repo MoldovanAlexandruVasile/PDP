@@ -34,7 +34,7 @@ public class PC {
         this.col = col;
     }
 
-    public void runProduce() throws InterruptedException {
+    public void runProducer() throws InterruptedException {
         Integer startLineLocal = startLine;
         synchronized (this) {
             while (list.size() == capacity)

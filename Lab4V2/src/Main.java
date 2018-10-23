@@ -106,7 +106,7 @@ public class Main {
             @Override
             public void run() {
                 try {
-                    pc.runProduce();
+                    pc.runProducer();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
