@@ -1,7 +1,6 @@
 package ProduceConsumer;
 
 import Domain.Matrix;
-
 import static Domain.AppUtils.log;
 
 public class Consumer implements Runnable {
