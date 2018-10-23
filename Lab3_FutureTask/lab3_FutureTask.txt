@@ -41,3 +41,38 @@ and having the new matrix syncronized.
         - 8 GB RAM
         - Processor: IntelCore I7
         - 2.50 GHz
+
+    Example:
+
+    Matrix 1:
+
+    2 1 3 2
+    1 2 2 5
+    2 5 1 4
+    1 2 1 5
+    3 1 4 2
+
+    ======================================================================
+
+    Matrix 2:
+
+    5 4 3 2 1
+    1 5 3 3 4
+    3 2 2 3 5
+    4 1 4 5 1
+
+    ======================================================================
+
+    Fourth branch
+    Creating a thread that iterates the from K to K lines.
+    Number of created threads: 2
+
+    Waiting for FutureTasks to finish...
+    Start time for task name - Thread 0 = 10:32:24
+    Completed - Thread 0 -> 10:32:24
+    Time took - Thread 0 -> 0
+    Start time for task name - Thread 1 = 10:32:24
+    Completed - Thread 1 -> 10:32:24
+    Time took - Thread 1 -> 0
+    Thread 0 - DONE !
+    Thread 1 - DONE !

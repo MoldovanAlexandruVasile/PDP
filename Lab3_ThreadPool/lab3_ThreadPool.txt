@@ -40,3 +40,35 @@ and having the new matrix syncronized.
         - 8 GB RAM
         - Processor: IntelCore I7
         - 2.50 GHz
+
+    Example:
+
+    Matrix 1:
+
+    3 2 1 1 3
+    1 3 2 3 3
+    2 3 4 3 1
+
+    ======================================================================
+
+    Matrix 2:
+
+    1 1 3 5 5
+    4 1 5 3 3
+    2 3 4 1 4
+
+    ======================================================================
+
+    Second branch
+    Creating a thread for each line of the matrix.
+    Number of created threads: 3
+
+    Start time for task name - Thread 0 = 10:29:39
+    Start time for task name - Thread 1 = 10:29:39
+    Start time for task name - Thread 2 = 10:29:39
+    Completed - Thread 2 -> 10:29:39
+    Completed - Thread 1 -> 10:29:39
+    Time took - Thread 1 -> 0
+    Completed - Thread 0 -> 10:29:39
+    Time took - Thread 0 -> 0
+    Time took - Thread 2 -> 0

@@ -1,4 +1,9 @@
 ﻿  Source.cpp
-e:\it\github\pdp\lab3_threadpoolc++\lab3\lab3\source.cpp(73): warning C4715: 'defineMatrix3': not all control paths return a value
+  Generating Code...
+  Compiling...
+  RunnableThread.cpp
+  Matrix.cpp
+e:\it\github\pdp\lab3_threadpoolc++\lab3\lab3\matrix.cpp(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
   Lab3.vcxproj -> E:\IT\GitHub\PDP\Lab3_ThreadPoolC++\Lab3\x64\Debug\Lab3.exe
   Lab3.vcxproj -> E:\IT\GitHub\PDP\Lab3_ThreadPoolC++\Lab3\x64\Debug\Lab3.pdb (Partial PDB)
