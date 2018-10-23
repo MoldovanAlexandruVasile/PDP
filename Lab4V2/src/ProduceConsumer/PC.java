@@ -82,7 +82,6 @@ public class PC {
         }
     }
 
-
     public synchronized void multiplyProduceMatrix(Matrix m1, Matrix m2, Integer line, Integer col) {
         synchronized (auxResult) {
             if (col == -1)
