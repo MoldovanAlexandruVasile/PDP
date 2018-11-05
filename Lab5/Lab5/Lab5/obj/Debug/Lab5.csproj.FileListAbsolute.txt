@@ -1,0 +1,6 @@
+E:\IT\GitHub\PDP\Lab5\Lab5\Lab5\bin\Debug\Lab5.exe.config
+E:\IT\GitHub\PDP\Lab5\Lab5\Lab5\bin\Debug\Lab5.exe
+E:\IT\GitHub\PDP\Lab5\Lab5\Lab5\bin\Debug\Lab5.pdb
+E:\IT\GitHub\PDP\Lab5\Lab5\Lab5\obj\Debug\Lab5.csprojResolveAssemblyReference.cache
+E:\IT\GitHub\PDP\Lab5\Lab5\Lab5\obj\Debug\Lab5.exe
+E:\IT\GitHub\PDP\Lab5\Lab5\Lab5\obj\Debug\Lab5.pdb
