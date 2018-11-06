@@ -11,6 +11,7 @@ namespace WebDownloader
     class Program
     {
         private static List<string> pages = new List<string>();
+
         static void Main(string[] args)
         {
             pages.Add(@"https://stackoverflow.com/questions/42077388/type-used-in-a-using-statement-must-be-implicitly-convertible-to-system-idispos");
