@@ -23,15 +23,16 @@ public class Main {
                 runnableThread.start();
             }
         else {
-            Karatsuba k = new Karatsuba(polynomial1.getCoefs(), polynomial2.getCoefs(), polynomial1.getCoefs().size());
-            k.start();
             try {
+                Karatsuba k = new Karatsuba(polynomial1.getCoefs(), polynomial2.getCoefs(), polynomial1.getCoefs().size());
+                k.start();
                 k.join();
+                polynomial3.setCoefs(k.getResult());
             } catch (InterruptedException | IndexOutOfBoundsException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
-            polynomial3.setCoefs(k.getResult());
         }
+
         printPolynom(polynomial3, "\n\tA(X)*B(X) = ");
     }
 

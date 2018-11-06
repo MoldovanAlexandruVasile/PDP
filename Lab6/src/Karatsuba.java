@@ -5,15 +5,14 @@ public class Karatsuba extends Thread {
     private List<Integer> pol1;
     private List<Integer> pol2;
     private List<Integer> result;
-    private int nrThreadsAllowed;
+    private Integer nrThreadsAllowed;
 
-    Karatsuba(List<Integer> pol1, List<Integer> pol2, int nrThreadsAllowed) {
+    Karatsuba(List<Integer> pol1, List<Integer> pol2, Integer nrThreadsAllowed) {
         this.pol1 = pol1;
         this.pol2 = pol2;
         this.nrThreadsAllowed = nrThreadsAllowed;
         if (pol1.size() != pol2.size()) equalize();
         result = new ArrayList<>(pol1.size() + pol2.size());
-
     }
 
     private void equalize() {
@@ -26,8 +25,8 @@ public class Karatsuba extends Thread {
             toComplete = pol1;
             other = pol2;
         }
-        int start = toComplete.size();
-        for (int i = start; i < other.size(); i++) {
+        Integer start = toComplete.size();
+        for (Integer i = start; i < other.size(); i++) {
             toComplete.add(0);
         }
     }
@@ -36,46 +35,38 @@ public class Karatsuba extends Thread {
         return result;
     }
 
-    public List<Integer> getFirstHalf(List<Integer> polynomial) {
-        int newSize = polynomial.size() / 2;
+    private List<Integer> getFirstHalf(List<Integer> polynomial) {
+        Integer newSize = polynomial.size() / 2;
         List<Integer> halfPolynomial = new ArrayList<>(newSize);
-        for (int i = 0; i < newSize; i++) {
+        for (Integer i = 0; i < newSize; i++) {
             halfPolynomial.add(polynomial.get(i));
         }
         return halfPolynomial;
     }
 
-    public List<Integer> getSecondHalf(List<Integer> polynomial) {
-        int originalSize = polynomial.size();
-        int newSize = polynomial.size() / 2;
+    private List<Integer> getSecondHalf(List<Integer> polynomial) {
+        Integer originalSize = polynomial.size();
+        Integer newSize = polynomial.size() / 2;
         List<Integer> halfPolynomial = new ArrayList<>(newSize);
-        for (int i = newSize; i < originalSize; i++) {
+        for (Integer i = newSize; i < originalSize; i++) {
             halfPolynomial.add(polynomial.get(i));
         }
         return halfPolynomial;
     }
 
     private List<Integer> splitAndSum(List<Integer> list) {
-        int size = list.size() / 2;
+        Integer size = list.size() / 2;
         List<Integer> halfPolynomial = new ArrayList<>(size);
-        for (int i = 0; i < size; i++) {
+        for (Integer i = 0; i < size; i++) {
             halfPolynomial.add(list.get(i) + list.get(i + size));
         }
         return halfPolynomial;
     }
 
 
-    private void addToResultFrom(List<Integer> list, int index, int multiplier) {
-        for (int i = 0; i < list.size(); i++) {
-
-            String out = "adding ";
-            out += list.get(i);
-            out += " to pos ";
-            out += i + index;
-            out += " which currently is ";
-            out += result.get(i);
+    private void addToResultFrom(List<Integer> list, Integer index, Integer multiplier) {
+        for (Integer i = 0; i < list.size(); i++)
             result.set(i + index, result.get(i + index) + list.get(i) * multiplier);
-        }
     }
 
     private void startNewBranch(Karatsuba thread) {
@@ -101,7 +92,6 @@ public class Karatsuba extends Thread {
                     nrThreadsAllowed / 3 + nrThreadsAllowed % 3
             );
             startNewBranch(thread1);
-
             Karatsuba thread2 = new Karatsuba(
                     pol1fSecondHalf,
                     pol2fSecondHalf,
@@ -114,7 +104,7 @@ public class Karatsuba extends Thread {
                     nrThreadsAllowed / 3
             );
             startNewBranch(thread3);
-            for (int i = 0; i < pol1.size() + pol2.size() - 1; i++) {
+            for (Integer i = 0; i < pol1.size() + pol2.size() - 1; i++) {
                 result.add(0);
             }
             try {
@@ -123,7 +113,7 @@ public class Karatsuba extends Thread {
                 thread2.join();
                 addToResultFrom(thread2.getResult(), result.size() - thread2.getResult().size(), 1);
                 thread3.join();
-                int position = (result.size() + 1) / 4;
+                Integer position = (result.size() + 1) / 4;
                 addToResultFrom(thread3.getResult(), position, 1);
                 addToResultFrom(thread1.getResult(), position, -1);
                 addToResultFrom(thread2.getResult(), position, -1);
@@ -131,10 +121,12 @@ public class Karatsuba extends Thread {
                 e.printStackTrace();
             }
         } else {
-            result.add(pol1.get(0) * pol2.get(0));
-            result.add((pol1.get(0) + pol1.get(1)) * (pol2.get(0) + pol2.get(1)) - pol1.get(0) * pol2.get(0) - pol1.get(1) * pol2.get(1));
-            result.add(pol1.get(1) * pol2.get(1));
-
+            try {
+                result.add(pol1.get(0) * pol2.get(0));
+                result.add((pol1.get(0) + pol1.get(1)) * (pol2.get(0) + pol2.get(1)) - pol1.get(0) * pol2.get(0) - pol1.get(1) * pol2.get(1));
+                result.add(pol1.get(1) * pol2.get(1));
+            } catch (IndexOutOfBoundsException e){
+            }
         }
     }
 }
