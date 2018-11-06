@@ -1,0 +1,21 @@
+	
+	Documentation for laboratory number 6.
+	Done by Moldovan Alexandru-Vasile.
+	
+	I have declared a list of strings. The strings placed in the list are the pages from where the content is read.
+	In the main function is initialized the pages list with some web pages url's and for each one it is created a Task that runns all of them with async and wait.
+	
+	There are created two methods:
+		- DownloadPageAsync - has a string parameter, which is the page from where the content will be downloaded.
+		- DownloadPageEvent - has a string parameter, which is the page from where the content will be downloaded.
+		
+	The method DownloadPageAsync creates a HTTPClient object, then a HttpResponseMessage objects calls for the client to get with async the page, it's content is handled
+with an object HttpContent that gets it's content and as a final step, a string is declared which contains the content returnes as a string, read asyncrounous and then the result it's printed.
+As a last thing, it's length will be printed.
+	The method DownloadPageEvent creates a WebClient that calls a method named DownloadStringCompleted that has as parameter a sender and a second parameter that contains the result. 
+The sender sends the result obtained from the WebClient in the result parameter and then it's printed using the method called Result used on the second parameter
+	
+	Hardware used:
+        - 8 GB RAM
+        - Processor: IntelCore I7
+        - 2.50 GHz
