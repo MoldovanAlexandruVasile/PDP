@@ -1,0 +1,18 @@
+	For the implementation of the code I used Java language written in IntelliJ.
+
+	I'm using 3 classes:
+		- Karatsuba - using Karatsuba algorithm computes the multiplication between polynomials
+		- Polynomial - The declaration of the polynomial
+		- RunnableThread - Computes the actual multiplication
+    In main there is declared a menu that allows the user to make his choice, how to compute the multiplication, by Karatsuba or with normal
+multiplication. There are functions that allows the user to write the polynomials from keyboard, for generating random numbers.
+    Polynomial class has as parameters the coefficients and the degree of the polynom.
+    RunnableThread has as parameters 3 polynoms and the coefficient of the third polynom.
+    Karatsuba has as parameters two polynoms, the coefficient and the nmber of threads allowed for use.
+	To assure the syncronization of the code executed on the above steps, it was used "synchronized" method. After calling a method all threads are syncronized
+and having the new matrix syncronized.
+
+    Hardware used:
+        - 8 GB RAM
+        - Processor: IntelCore I7
+        - 2.50 GHz

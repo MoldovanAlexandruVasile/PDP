@@ -39,7 +39,6 @@ public class Polynomial {
     }
 
     public void printPolynom(String string) {
-
         String polynom = "";
         Integer first = 0;
         for (Integer d = degree; d > 0; d--) {
@@ -60,6 +59,5 @@ public class Polynomial {
             polynom += coefs.get(coefs.size() - 1);
         else polynom += "+" + coefs.get(coefs.size() - 1);
         System.out.println(string + polynom);
-
     }
 }
