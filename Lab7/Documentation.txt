@@ -1,0 +1,24 @@
+	For the implementation of the code I used Java language written in IntelliJ.
+
+	I'm using the following classes:
+		- Main
+		- AppUtils
+		- PC
+    The application uses the Producer-Consumer method.
+    AppUtils is has a method that generates a number between two bounds and returns that number.
+    Main class has the following methods:
+        - printList - prints a list of numbers
+        - readInteger - read an integer from keyboard
+        - runPC - runs the Producer-Consumer threads
+    PC class is build of:
+        - Constructor - gets as parameters: list of numbers, list of results of addition, the current pos from which we start to add, and
+                        the number of elements to be added
+        - runProducer - adds the needed amount of numbers and then notifies the runConsumer
+        - runConsumer - after being notified by runProducer the consumer places the result in the list of results
+	To assure the syncronization of the code executed on the above steps, it was used "synchronized" method. After calling a method all threads are syncronized
+and having the new matrix syncronized.
+
+    Hardware used:
+        - 8 GB RAM
+        - Processor: IntelCore I7
+        - 2.50 GHz
