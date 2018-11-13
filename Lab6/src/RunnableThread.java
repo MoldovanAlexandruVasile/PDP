@@ -19,7 +19,6 @@ public class RunnableThread implements Runnable {
         synchronized (p3) {
             multiply(p1, p2, coeff);
         }
-
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
