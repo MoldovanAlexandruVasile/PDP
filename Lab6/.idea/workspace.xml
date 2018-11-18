@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="598499a9-e205-4144-9d6b-45ccf6e381b8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Lab6/Main.class" afterPath="$PROJECT_DIR$/out/production/Lab6/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Lab6/Polynomial.class" afterPath="$PROJECT_DIR$/out/production/Lab6/Polynomial.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Lab6/RunnableThread.class" afterPath="$PROJECT_DIR$/out/production/Lab6/RunnableThread.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Lab7/out/production/Lab7/Main.class" afterPath="$PROJECT_DIR$/../Lab7/out/production/Lab7/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Lab7/out/production/Lab7/ProduceConsumer/PC.class" afterPath="$PROJECT_DIR$/../Lab7/out/production/Lab7/ProduceConsumer/PC.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Lab2/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Lab2/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Lab3_ThreadPool/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Lab3_ThreadPool/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Lab4V2/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Lab4V2/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RunnableThread.java" afterPath="$PROJECT_DIR$/src/RunnableThread.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Lab7/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Lab7/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Lab7/src/Main.java" afterPath="$PROJECT_DIR$/../Lab7/src/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Lab7/src/ProduceConsumer/PC.java" afterPath="$PROJECT_DIR$/../Lab7/src/ProduceConsumer/PC.java" />
@@ -31,8 +24,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2291">
-              <caret line="132" column="5" lean-forward="true" selection-start-line="132" selection-start-column="5" selection-end-line="132" selection-end-column="5" />
+            <state relative-caret-position="630">
+              <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3295#3296#0" expanded="true" />
@@ -385,12 +378,12 @@
       <workItem from="1541510087412" duration="19000" />
       <workItem from="1541842601516" duration="53000" />
       <workItem from="1542051512418" duration="350000" />
-      <workItem from="1542096734896" duration="4350000" />
+      <workItem from="1542096734896" duration="4403000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15273000" />
+    <option name="totallyTimeSpent" value="15326000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -636,8 +629,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2291">
-          <caret line="132" column="5" lean-forward="true" selection-start-line="132" selection-start-column="5" selection-end-line="132" selection-end-column="5" />
+        <state relative-caret-position="630">
+          <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3295#3296#0" expanded="true" />

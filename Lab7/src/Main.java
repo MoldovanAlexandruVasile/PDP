@@ -19,9 +19,11 @@ public class Main {
         k = readInteger("\tk = ");
         for (Integer i = 0; i < n; i++)
             numbers.add(randomNumber());
+
         printList("\n\t\tNumbers: ", numbers);
-        for (Integer i = 0; i < n; i++) {
-            PC pc = new PC(numbers, i, results);
+        results.add(numbers.get(0));
+        for (Integer i = 0; i < n - k + 1; i++) {
+            PC pc = new PC(numbers, k, i, results);
             runPC(pc);
         }
         printList("\t\tResult: ", results);
