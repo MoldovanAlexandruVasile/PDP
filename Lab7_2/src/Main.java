@@ -47,7 +47,7 @@ public class Main {
             RunnableThread runnableThread = new RunnableThread(number1List, number2List, number3List, remainder, i);
             tree.add(runnableThread);
         }
-        tree.traverseLevelOrder();
+        remainder = tree.traverseLevelOrder();
 
 //        Integer remainder = 0;
 //        for (Integer i = number1List.size() - 1; i >= 0; i--) {
@@ -55,8 +55,11 @@ public class Main {
 //            runnableThread.start();
 //            remainder = runnableThread.getRemainder();
 //        }
-
-        String number = "";
+        
+        String number;
+        if (remainder != 0)
+             number = String.valueOf(remainder);
+        else number = "";
         for (Integer i = 0; i < number3List.size(); i++)
             number += number3List.get(i);
         System.out.println("\n\t\tResult: " + number);

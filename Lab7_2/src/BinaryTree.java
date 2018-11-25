@@ -8,18 +8,11 @@ public class BinaryTree {
         root = null;
     }
 
-    private Node addRecursive(Node current, RunnableThread value) {
+    private Node addRecursive(Node current, RunnableThread thread) {
         if (current == null) {
-            return new Node(value);
+            return new Node(thread);
         }
-        if (current.left == null) {
-            current.left = addRecursive(current.left, value);
-        } else if (current.right == null) {
-            current.right = addRecursive(current.right, value);
-        } else {
-            return current;
-        }
-
+        current.left = addRecursive(current.left, thread);
         return current;
     }
 
@@ -27,9 +20,9 @@ public class BinaryTree {
         root = addRecursive(root, value);
     }
 
-    void traverseLevelOrder() throws InterruptedException {
+    Integer traverseLevelOrder() throws InterruptedException {
         if (root == null) {
-            return;
+            return 0;
         }
         Queue<Node> nodes = new LinkedList<>();
         nodes.add(root);
@@ -42,9 +35,12 @@ public class BinaryTree {
             if (node.left != null) {
                 nodes.add(node.left);
             }
-            if (node.right!= null) {
+            if (node.right != null) {
                 nodes.add(node.right);
             }
         }
+        if (remainder != 0)
+            return 1;
+        return 0;
     }
 }
