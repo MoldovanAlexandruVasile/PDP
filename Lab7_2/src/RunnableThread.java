@@ -45,7 +45,7 @@ public class RunnableThread implements Runnable {
         return remainder;
     }
 
-    private void setRemainder(Integer remainder) {
+    public void setRemainder(Integer remainder) {
         this.remainder = remainder;
     }
 }

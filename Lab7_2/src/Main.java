@@ -41,12 +41,20 @@ public class Main {
 
         for (Integer i = 0; i < number1List.size(); i++)
             number3List.add(0);
+        BinaryTree tree = new BinaryTree();
         Integer remainder = 0;
         for (Integer i = number1List.size() - 1; i >= 0; i--) {
             RunnableThread runnableThread = new RunnableThread(number1List, number2List, number3List, remainder, i);
-            runnableThread.start();
-            remainder = runnableThread.getRemainder();
+            tree.add(runnableThread);
         }
+        tree.traverseLevelOrder();
+
+//        Integer remainder = 0;
+//        for (Integer i = number1List.size() - 1; i >= 0; i--) {
+//            RunnableThread runnableThread = new RunnableThread(number1List, number2List, number3List, remainder, i);
+//            runnableThread.start();
+//            remainder = runnableThread.getRemainder();
+//        }
 
         String number = "";
         for (Integer i = 0; i < number3List.size(); i++)
