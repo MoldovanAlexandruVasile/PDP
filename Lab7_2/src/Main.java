@@ -55,7 +55,7 @@ public class Main {
 //            runnableThread.start();
 //            remainder = runnableThread.getRemainder();
 //        }
-        
+
         String number;
         if (remainder != 0)
              number = String.valueOf(remainder);

@@ -1,0 +1,37 @@
+	For the implementation of the code I used Java language written in IntelliJ.
+
+	I'm using the following classes:
+		- Main
+		- BinaryTree
+		- Node
+		- RunnableThread
+
+    Main class has the following methods:
+        - readNumber - reads a string from keyboard
+        - main - the main of the program
+
+    BinaryTree class has the following methods:
+        - Constructor - creates a binary tree with the first node being null
+        - add - calls the addRecursive method
+        - addRecursive - returns the current added node
+        - traversLevelOrder - Traverse the binary tree in BNF order and starts the threads to compute the sum
+
+    Node class has the following methods:
+        - Constructor - constructs the node
+
+    RunnableThread class implements Runnable and has the following methods:
+        - Constructor
+        - getRemainder - get the remainder of the class
+        - setRemainder - sets the remainder of the class
+        - run - computes the sum of the two digits from the same pos
+
+    In main, there is read two numbers and the numbers are placed in two lists. The lower number is completed with zeros in its front to be of
+the same size and a BinaryTree class is created. It is parsed from the last digit to the first and a RunnableThread is created and added to the
+tree as a node.
+	To assure the syncronization of the code executed on the above steps, it was used "synchronized" method. After calling a method all threads are syncronized
+and having the new matrix syncronized.
+
+    Hardware used:
+        - 8 GB RAM
+        - Processor: IntelCore I7
+        - 2.50 GHz
