@@ -11,60 +11,53 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         initPolynoms();
-        System.out.println("\n");
-        printPolynom(polynomial1, "\tA(X) = ");
-        printPolynom(polynomial2, "\tB(X) = ");
-
         MPI.Init(args);
+        System.out.println("\n");
+
         int rank = MPI.COMM_WORLD.Rank();
         int size = MPI.COMM_WORLD.Size();
         int tag = 10, peer = (rank == 0) ? 1 : 0;
         if (rank == 0) {
-            for (Integer no = 0; no < polynomial3.getDegree(); no++) {
-                Object[] sendObjectArray = new Object[1];
-                sendObjectArray[0] = no;
+            printPolynom(polynomial1, "\tA(X) = ");
+            printPolynom(polynomial2, "\tB(X) = ");
+            Object[] sendObjectArray = new Object[1];
+            for (Integer i = 0; i < polynomial2.getDegree(); i++) {
+                sendObjectArray[0] = i;
                 MPI.COMM_WORLD.Send(sendObjectArray, 0, 1, MPI.OBJECT, peer, tag);
             }
+            printPolynom(polynomial3, "\nProcess number: " + size + "\tC(X) = ");
         } else if (rank == 1) {
-            for (Integer no = 0; no < polynomial3.getDegree(); no++) {
-                Object[] recvObjectArray = new Object[1];
+            Object[] recvObjectArray = new Object[1];
+            for (Integer i = 0; i < polynomial3.getDegree(); i++) {
                 MPI.COMM_WORLD.Recv(recvObjectArray, 0, 1, MPI.OBJECT, peer, tag);
-                Integer getNo = (Integer) recvObjectArray[0];
-                polynomial3.addCoefAtIndex(getNo, polynomial1.getCoefs().get(getNo), polynomial2.getCoefs().get(getNo));
+                Integer coef = (Integer) recvObjectArray[0];
+                for (Integer j = 0; j < polynomial2.getCoefs().size(); j++) {
+                    Integer pos = coef + j;
+                    polynomial3.addCoefAtIndex(pos, polynomial1.getCoefs().get(coef), polynomial2.getCoefs().get(j));
+//                    Karatsuba k = new Karatsuba(polynomial1.getCoefs(), polynomial2.getCoefs(), polynomial1.getCoefs().size());
+//                    k.start();
+//                    k.join();
+//                    polynomial3.setCoefs(k.getResult());
+                }
             }
         }
-        printPolynom(polynomial3, "\tC(X) = ");
         MPI.Finalize();
     }
 
     private static void initPolynoms() throws Exception {
         List<Integer> coefs = new ArrayList<>();
         List<Integer> coefs2 = new ArrayList<>();
-        Integer degree = randomNumber(2, 10);
-        Integer degree2 = randomNumber(2, 10);
-        Boolean first = true;
-        if (degree > degree2)
-            first = false;
-        Integer zeros = 0;
-        Integer zeros2 = 0;
-        if (first) {
-            zeros = degree2 - degree;
-            for (Integer no = 0; no < zeros; no++)
-                coefs.add(0);
-        } else {
-            zeros2 = degree - degree2;
-            for (Integer no = 0; no < zeros2; no++)
-                coefs2.add(0);
-        }
+        Integer degree = 7;
+        Integer degree2 = 7;
 
         for (Integer no = 0; no <= degree; no++)
-            coefs.add(randomNumber(-5, 10));
-        polynomial1 = new Polynomial(coefs, degree + zeros);
+            coefs.add(no);
+        polynomial1 = new Polynomial(coefs, degree);
         Integer i = degree;
 
         for (Integer no = 0; no <= degree2; no++)
-            coefs2.add(randomNumber(-5, 10));
-        polynomial2 = new Polynomial(coefs2, degree2 + zeros2);
+            coefs2.add(no);
+        polynomial2 = new Polynomial(coefs2, degree2);
         Integer j = degree2;
 
         Integer size = i + j;
