@@ -14,6 +14,7 @@ class Filters {
     void applyBlueFilter(Integer fromHeight, Integer fromWidth,
                          Integer toHeight, Integer toWidth) {
         try {
+            System.out.println("Applying BLUE filter...");
             for (Integer y = fromHeight; y < toHeight; y++) {
                 for (Integer x = fromWidth; x < toWidth; x++) {
                     Integer p = img.getRGB(x, y);
@@ -31,6 +32,7 @@ class Filters {
     void applyRedFilter(Integer fromHeight, Integer fromWidth,
                         Integer toHeight, Integer toWidth) {
         try {
+            System.out.println("Applying RED filter...");
             for (Integer y = fromHeight; y < toHeight; y++) {
                 for (Integer x = fromWidth; x < toWidth; x++) {
                     Integer p = img.getRGB(x, y);
@@ -48,6 +50,7 @@ class Filters {
     void applyGreenFilter(Integer fromHeight, Integer fromWidth,
                                  Integer toHeight, Integer toWidth) {
         try {
+            System.out.println("Applying GREEN filter...");
             for (Integer y = fromHeight; y < toHeight; y++) {
                 for (Integer x = fromWidth; x < toWidth; x++) {
                     int p = img.getRGB(x, y);
@@ -65,6 +68,7 @@ class Filters {
     void applyNegativeFilter(Integer fromHeight, Integer fromWidth,
                                     Integer toHeight, Integer toWidth) {
         try {
+            System.out.println("Applying NEGATIVE filter...");
             for (Integer y = fromHeight; y < toHeight; y++) {
                 for (Integer x = fromWidth; x < toWidth; x++) {
                     int p = img.getRGB(x, y);

@@ -1,0 +1,31 @@
+Final Project: Applying a filter on an image
+
+Moldovan Alexandru, Moldovanu Tudor group 935
+
+Programming language: Java
+IDE: Intellij
+
+Classes:
+MPI:
+    Filters: receives an image as a parameter and applies filters to it(blue, red, green and negative).
+        The 4 functions for applying filters (void applyColorFilter()) receive as parameters starting and final
+        heights and widths, parse the image (or part of an image) pixel by pixel, attributing a new color to the respective pixels.
+
+    Main: receives a file as input, transforms it into a BufferedImage, computes its width and height, applies the filters and
+        creates an output image file. The functions that send the filter coordinates receive as parameters a width, height,
+        a destination process and a message(tag). The coordinates of the image corresponding to the color are then computed and sent
+        to the other process. The functions that receive the filter coordinates apply the filters.
+Parallel:
+    Filters: receives an image as a parameter and applies filters to it(blue, red, green and negative).
+             The 4 functions for applying filters (void applyColorFilter()) receive as parameters starting and final
+             heights and widths, parse the image (or part of an image) pixel by pixel, attributing a new color to the respective pixels.
+    RunnableThread: receives as parameters the Filters class, 4 pixel coordinates (start height, start width, finish height, finish width)
+             and the filter type: BLUE, RED, GREEN or NEGATIVE. In the run method we synchronize the filter class received as parameter.
+    Main: receives a file as input, transforms it into a BufferedImage, computes its width and height, applies the filters and
+          creates an output image file. We create a thread for each filter we are applying(4). After we create the RunnableThread
+          for each filter we start it. After the start it's done for each thread an output.jpg is created
+
+
+
+OS: Windows 10
+Hardware: 8GB RAM, 4 cores, I7
